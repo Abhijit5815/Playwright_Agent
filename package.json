@@ -1,0 +1,26 @@
+
+{
+  "name": "playwright-agentic-ai",
+  "version": "1.0.0",
+  "description": "Generate Playwright tests using Agentic AI",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.2.21",
+    "@langchain/ollama": "^0.1.6",
+    "@playwright/test": "^1.40.0",
+    "ollama": "^0.1.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  }
+}
