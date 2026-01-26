@@ -1,4 +1,8 @@
-// Define all TypeScript types and interfaces
+/**
+ * Domain Types
+ * 
+ * Core TypeScript interfaces and types for page analysis, state management, and configuration.
+ */
 export interface PageAnalysis {
   title: string;
   url: string;

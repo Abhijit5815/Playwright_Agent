@@ -1,5 +1,10 @@
-// Structured logging utility
-import { ENV } from '../config/constants';
+/**
+ * Logger
+ * 
+ * Structured logging with configurable levels (debug, info, warn, error).
+ * Reads log level from agent config.
+ */
+import { ENV } from '../config';
 
 type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 

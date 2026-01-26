@@ -1,0 +1,8 @@
+{
+  "OLLAMA_BASE_URL": "http://localhost:11434",
+  "LLM_MODEL": "llama3.2:3b",
+  "LOG_LEVEL": "info",
+  "TIMEOUT": 30000,
+  "MAX_RETRIES": 3,
+  "ALLOWED_DOMAINS": ["localhost", "example.com"]
+}
