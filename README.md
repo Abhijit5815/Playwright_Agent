@@ -36,6 +36,13 @@ ollama pull llama3.2:3b
 
 4) Configure `agent.config.json` (see below)
 
+5) (Optional) Configure Jira enrichment
+
+Copy `jira.config.example.json` → `jira.config.json` and set:
+- `JIRA_BASE_URL`
+- `JIRA_EMAIL`
+- `JIRA_API_TOKEN`
+
 ## Configure (agent.config.json)
 `agent.config.json` at the repo root controls runtime behavior.
 
@@ -60,6 +67,8 @@ ollama pull llama3.2:3b
 ## Run
 ```bash
 npm run dev -- https://example.com
+# Optional Jira issue enrichment
+npm run dev -- https://example.com --jira PROJ-123
 ```
 
 What happens:

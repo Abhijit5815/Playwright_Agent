@@ -40,7 +40,18 @@ export interface AgentState {
   analysisSummary?: string;
   testPlan?: string;
   testCode?: string;
+  jiraIssue?: JiraIssue;
   errors?: string[];
+}
+
+export interface JiraIssue {
+  key: string;
+  summary: string;
+  description?: string;
+  issueType?: string;
+  status?: string;
+  priority?: string;
+  labels?: string[];
 }
 
 export interface LLMConfig {

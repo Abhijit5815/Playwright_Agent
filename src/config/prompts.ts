@@ -11,6 +11,9 @@ export const PROMPT_TEMPLATES = {
 Page analysis data:
 {pageData}
 
+Jira context (if provided):
+{jiraData}
+
 Return:
 - Key user journeys (bullets)
 - Critical elements to cover (bullets)
@@ -26,6 +29,9 @@ Analysis:
 Page analysis data:
 {pageData}
 
+Jira context (if provided):
+{jiraData}
+
 Return a numbered plan with 3-6 tests, each with:
 - Goal
 - Key steps
@@ -40,6 +46,9 @@ Plan:
 
 Page analysis data:
 {pageData}
+
+Jira context (if provided):
+{jiraData}
 
 Rules:
 1. Start with: import {{ test, expect }} from '@playwright/test';

@@ -6,8 +6,10 @@
  */
 import { LLMConfig } from '../types';
 import { loadConfig } from './loader';
+import { loadJiraConfig } from './jiraLoader';
 
 const fileCfg = loadConfig();
+const jiraCfg = loadJiraConfig();
 
 export const ENV = {
   OLLAMA_BASE_URL: fileCfg.OLLAMA_BASE_URL!,
@@ -24,6 +26,14 @@ export const LLM_CONFIG: LLMConfig = {
   temperature: typeof fileCfg.LLM_TEMPERATURE === 'number' ? fileCfg.LLM_TEMPERATURE : 0.7,
   maxTokens: typeof fileCfg.LLM_MAX_TOKENS === 'number' ? fileCfg.LLM_MAX_TOKENS : 4096,
 };
+
+export const JIRA_CONFIG = jiraCfg && jiraCfg.JIRA_BASE_URL && jiraCfg.JIRA_EMAIL && jiraCfg.JIRA_API_TOKEN
+  ? {
+      baseUrl: jiraCfg.JIRA_BASE_URL,
+      email: jiraCfg.JIRA_EMAIL,
+      apiToken: jiraCfg.JIRA_API_TOKEN,
+    }
+  : undefined;
 
 export const PLAYWRIGHT_CONFIG = {
   headless: true,

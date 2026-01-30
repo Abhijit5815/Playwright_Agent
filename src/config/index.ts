@@ -10,3 +10,4 @@ export * from './guardrailTypes';
 export * from './locatorPriority';
 export * from './loader';
 export * from './loader';
+export * from './jiraLoader';

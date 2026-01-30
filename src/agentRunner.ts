@@ -10,10 +10,14 @@ import { ENV, LLM_CONFIG } from './config';
 import { TestWriter } from './services/testWriter';
 
 async function main() {
-  const url = process.argv[2];
+  const args = process.argv.slice(2);
+  const url = args.find((arg) => !arg.startsWith('--'));
+  const jiraArg = args.find((arg) => arg.startsWith('--jira='))?.split('=')[1];
+  const jiraFlagIndex = args.findIndex((arg) => arg === '--jira');
+  const jiraKey = jiraArg || (jiraFlagIndex >= 0 ? args[jiraFlagIndex + 1] : undefined);
 
   if (!url) {
-    console.error('Usage: npm run dev -- <url>');
+    console.error('Usage: npm run dev -- <url> [--jira <ISSUE_KEY>]');
     process.exit(1);
   }
 
@@ -26,7 +30,7 @@ async function main() {
   const writer = new TestWriter();
 
   try {
-    const testCode = await agent.run(url);
+    const testCode = await agent.run(url, jiraKey);
     const { filepath, lines } = writer.write(url, testCode);
 
     console.log('\n=== ✅ TEST FILE GENERATED ===\n');
