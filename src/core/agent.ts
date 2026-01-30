@@ -28,12 +28,25 @@ export class PlaywrightAgent {
   }
 
   async generateTest(pageAnalysis: PageAnalysis): Promise<string> {
-    logger.info('Generating test code using LLM');
+    logger.info('Generating test code using multi-step LLM chain');
 
     const pageDataStr = JSON.stringify(pageAnalysis, null, 2);
-    const fullPrompt = `${PROMPT_TEMPLATES.SYSTEM}\n\n${PROMPT_TEMPLATES.ANALYSIS.replace('{pageData}', pageDataStr)}`;
 
-    const testCode = await this.llmClient.generate(fullPrompt);
+    const analysisPrompt = `${PROMPT_TEMPLATES.SYSTEM}\n\n${PROMPT_TEMPLATES.ANALYZE.replace('{pageData}', pageDataStr)}`;
+    const analysisSummary = await this.llmClient.generate(analysisPrompt);
+    this.state.analysisSummary = analysisSummary;
+
+    const planPrompt = `${PROMPT_TEMPLATES.SYSTEM}\n\n${PROMPT_TEMPLATES.PLAN
+      .replace('{analysis}', analysisSummary)
+      .replace('{pageData}', pageDataStr)}`;
+    const testPlan = await this.llmClient.generate(planPrompt);
+    this.state.testPlan = testPlan;
+
+    const generatePrompt = `${PROMPT_TEMPLATES.SYSTEM}\n\n${PROMPT_TEMPLATES.GENERATE
+      .replace('{plan}', testPlan)
+      .replace('{pageData}', pageDataStr)}`;
+
+    const testCode = await this.llmClient.generate(generatePrompt);
     this.guardrails.enforceOrThrow(testCode);
     this.state.testCode = testCode;
 

@@ -37,6 +37,8 @@ export interface TestGenerationOptions {
 
 export interface AgentState {
   pageAnalysis?: PageAnalysis;
+  analysisSummary?: string;
+  testPlan?: string;
   testCode?: string;
   errors?: string[];
 }
